@@ -1,0 +1,80 @@
+// https://dbdiagram.io
+
+// Use DBML to define your database structure
+// Docs: https://dbml.dbdiagram.io/docs
+
+Table Products {
+  id UINT [primary key]
+  price_rub UINT // Копеек уж не будет.
+  registered_at TIMESTAMP
+  released_at TIMESTAMP
+}
+
+Table Monitors {
+  id UINT [primary key]
+  product_id UINT [unique]
+  resolution_width_px UINT
+  resolution_height_px UINT
+  diagonal FLOAT4
+  glossy BOOL
+  dc_dimming BOOL
+}
+
+Table Monoblocks {
+  id UINT [primary key]
+  product_id UINT [unique]
+  monitor_part_id UINT
+  cpu_id UINT
+  gpu_id UINT
+  ram_gb UINT
+}
+
+Table Reviews {
+  id UINT [primary key]
+  product_id UINT
+  user_id UINT
+  created_at TIMESTAMP
+}
+
+Table ReviewRevs {
+  id UINT [primary key]
+  review_id UINT
+  content TEXT
+  modified_at TIMESTAMP
+}
+
+Table Users {
+  id UINT [primary key]
+  first_name VARCHAR(32)
+  last_name VARCHAR(32)
+  email VARCHAR(128)
+  registered_at TIMESTAMP
+  password_sha256_hash TEXT
+  yandex_oauth_token TEXT
+}
+
+Table Cpu {
+  id UINT [primary key]
+  vendor VARCHAR(16)
+  model VARCHAR(32) [unique]
+  cpubenchmark_pts UINT
+}
+
+Table Gpu {
+  id UINT [primary key]
+  vendor VARCHAR(16)
+  model VARCHAR(16) [unique]
+  furmark_fps UINT
+}
+
+
+Ref: Monitors.product_id - Products.id
+Ref: Monoblocks.product_id - Products.id
+Ref: Reviews.product_id > Products.id
+
+Ref: Monoblocks.monitor_part_id > Monitors.id
+Ref: Monoblocks.cpu_id > Cpu.id
+Ref: Monoblocks.gpu_id > Gpu.id
+
+Ref: Reviews.user_id > Users.id
+Ref: ReviewRevs.review_id > Reviews.id
