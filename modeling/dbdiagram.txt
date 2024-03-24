@@ -56,14 +56,14 @@ Table Users {
 Table Cpu {
   id UINT [primary key]
   vendor VARCHAR(16)
-  model VARCHAR(32) [unique]
+  model VARCHAR(32)
   cpubenchmark_pts UINT
 }
 
 Table Gpu {
   id UINT [primary key]
   vendor VARCHAR(16)
-  model VARCHAR(16) [unique]
+  model VARCHAR(16)
   furmark_fps UINT
 }
 
