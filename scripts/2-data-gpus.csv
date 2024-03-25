@@ -6,3 +6,11 @@ id,vendor,model,furmark_fps
 5,Intel,HD520,9
 6,Intel,UHD770,14
 7,Nvidia,MX550,25
+8,Nvidia,GT710,10
+9,Amd,R7-240,14
+10,Nvidia,GT1030,19
+11,Amd,RX550,38
+12,Amd,RX6400,53
+13,Intel,A380,51
+14,Amd,RX6500XT,91
+15,Nvidia,T400,25
