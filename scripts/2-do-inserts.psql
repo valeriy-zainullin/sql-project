@@ -1,0 +1,18 @@
+--  Просто по 30 строк в каждую из таблиц.
+--  В Products по 60 строк, т.к. на
+--    каждый монитор и моноблок нужно
+--    по строчке в таблице продуктов.
+
+-- There is COPY statement is specific to PostgreSQL!
+--   https://www.postgresqltutorial.com/postgresql-tutorial/import-csv-file-into-posgresql-table/
+--   https://www.postgresql.org/docs/current/sql-copy.html
+-- But we use psql copy facility, which uses local files, not server ones.
+
+\COPY Products   FROM '2-data-products.csv'   DELIMITER ',' CSV HEADER;
+\COPY Monitors   FROM '2-data-monitors.csv'   DELIMITER ',' CSV HEADER;
+\COPY Cpus       FROM '2-data-cpus.csv'       DELIMITER ',' CSV HEADER;
+\COPY Gpus       FROM '2-data-gpus.csv'       DELIMITER ',' CSV HEADER;
+\COPY Monoblocks FROM '2-data-monoblocks.csv' DELIMITER ',' CSV HEADER;
+\COPY Users      FROM '2-data-users.csv'      DELIMITER ',' CSV HEADER;
+\COPY Reviews    FROM '2-data-reviews.csv'    DELIMITER ',' CSV HEADER;
+\COPY ReviewRevs FROM '2-data-reviewrevs.csv' DELIMITER ',' CSV HEADER;
