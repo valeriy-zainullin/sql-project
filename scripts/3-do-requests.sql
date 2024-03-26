@@ -25,7 +25,6 @@ WITH
     ),
     Monitors_2022(id, model_line, model, product_id) AS (
         SELECT
-            Monitors.id AS monitor_id,
             Monitors.model_line AS model_line,
             Monitors.model AS model,
             Products_2022.id AS product_id,
@@ -48,10 +47,9 @@ WITH
                 ReviewRevs.modified_at = (SELECT MAX(modified_at) FROM ReviewRevs WHERE review_id = Reviews.id)
     )
 SELECT
-    Monitors_2022.id AS monitor_id,
+    Monitors_2022.product_id AS product_id,
     Monitors_2022.model_line AS model_line,
     Monitors_2022.model AS model,
-    Monitors_2022.product_id AS product_id,
     Monitors_2022.released_at AS released_at,
     LastReviews.id AS review_id,
     LastReviews.user_id AS user_id,
@@ -146,7 +144,7 @@ WHERE cpu_id = (SELECT id FROM Cpus WHERE vendor = 'Intel' AND model = 'I7-13700
 --   его процессор в cpubenchmark, его видеокарта
 --   в furmark.
 SELECT
-    id,
+    product_id,
     model_line,
     model,
     (SELECT cpubenchmark_pts FROM Cpus WHERE id = Monoblocks.cpu_id),
