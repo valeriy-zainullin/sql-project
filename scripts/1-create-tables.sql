@@ -16,7 +16,7 @@ CREATE TABLE Products (
 
 CREATE TABLE Monitors (
   product_id           UINT        PRIMARY KEY,
-  model_line           VARCHAR(16) NULL,
+  model_line           VARCHAR(16),
   model                VARCHAR(16) NOT NULL UNIQUE,
   resolution_width_px  UINT        NOT NULL CHECK(resolution_width_px >= 1),
   resolution_height_px UINT        NOT NULL CHECK(resolution_height_px >= 1),

@@ -23,11 +23,11 @@ WITH
         WHERE
             date_part('year', released_at) = 2022
     ),
-    Monitors_2022(id, model_line, model, product_id) AS (
+    Monitors_2022(product_id, model_line, model, released_at) AS (
         SELECT
+            Products_2022.id AS product_id,
             Monitors.model_line AS model_line,
             Monitors.model AS model,
-            Products_2022.id AS product_id,
             Products_2022.released_at AS released_at
         FROM
             Monitors INNER JOIN Products_2022

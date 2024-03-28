@@ -11,8 +11,9 @@ Table Products {
 }
 
 Table Monitors {
-  id UINT [primary key]
-  product_id UINT [unique]
+  product_id UINT [primary key]
+  model_line VARCHAR(16)
+  model VARCHAR(16)
   resolution_width_px UINT
   resolution_height_px UINT
   diagonal FLOAT4
@@ -21,8 +22,9 @@ Table Monitors {
 }
 
 Table Monoblocks {
-  id UINT [primary key]
-  product_id UINT [unique]
+  product_id UINT [primary key]
+  model_line VARCHAR(16)
+  model VARCHAR(16)
   monitor_part_id UINT
   cpu_id UINT
   gpu_id UINT
@@ -55,15 +57,15 @@ Table Users {
 
 Table Cpu {
   id UINT [primary key]
-  vendor VARCHAR(16)
-  model VARCHAR(32)
+  vendor ENUM('Intel', 'AMD')
+  model VARCHAR(32) [unique]
   cpubenchmark_pts UINT
 }
 
 Table Gpu {
   id UINT [primary key]
-  vendor VARCHAR(16)
-  model VARCHAR(16)
+  vendor ENUM('AMD', 'Nvidia', 'Intel')
+  model VARCHAR(16) [unique]
   furmark_fps UINT
 }
 
@@ -72,7 +74,7 @@ Ref: Monitors.product_id - Products.id
 Ref: Monoblocks.product_id - Products.id
 Ref: Reviews.product_id > Products.id
 
-Ref: Monoblocks.monitor_part_id > Monitors.id
+Ref: Monoblocks.monitor_part_id > Monitors.product_id
 Ref: Monoblocks.cpu_id > Cpu.id
 Ref: Monoblocks.gpu_id > Gpu.id
 
