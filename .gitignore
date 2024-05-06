@@ -1,1 +1,4 @@
 *.code-workspace
+.venv
+__pycache__
+.pytest_cache
